@@ -1,0 +1,244 @@
+.page-apropos {
+    min-height: 100dvh;
+    background: #FDF9F0;
+}
+
+.titre-contact,
+.titre-apropos,
+.titre-projets {
+    width: min(calc(100% - 3rem), 1400px);
+    margin: 0 auto;
+    padding: 8rem 0 5rem;
+
+    display: grid;
+    grid-template-columns: minmax(280px, 0.55fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+}
+
+.titre-contact > *,
+.titre-apropos > *,
+.titre-projets > * {
+    min-width: 0;
+}
+
+.titre {
+    min-width: 0;
+
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+.label {
+    margin: 0;
+    font-family: 'Bagel Fat One', system-ui;
+    color: #481f19;
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    overflow-wrap: normal;
+}
+
+#photo{
+    border-radius: 50px;
+    border: 1px solid #481f19;
+    width: 300px;
+    height: 480px;
+    object-fit: cover;
+    object-position: center top;
+
+}
+
+.separateur {
+    position: relative;
+    flex: 0 0 2px;
+
+    width: 2px;
+    height: min(400px, 45vh);
+
+    border-radius: 2px;
+    background: linear-gradient(
+        to bottom,
+        #481f19,
+        rgba(72, 31, 25, 0.2)
+    );
+}
+
+.separateur::before {
+    content: "";
+
+    position: absolute;
+    top: -5px;
+    left: 50%;
+
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+    background: #481f19;
+
+    transform: translateX(-50%);
+}
+
+.fenetre-terminal-about {
+    position: relative;
+
+    width: 100%;
+    min-width: 0;
+    margin-bottom: 2rem;
+    overflow: hidden;
+
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 8px;
+    background: whitesmoke;
+    box-shadow: 0 24px 55px rgba(72, 31, 25, 0.12);
+}
+
+.editeur-toolbar {
+    display: flex;
+    gap: 1.25rem;
+    padding: 0.45rem 1rem;
+
+    border-bottom: 1px solid black;
+    background: whitesmoke;
+
+    color: #2c2c2c;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 0.78rem;
+}
+
+.body-editeur {
+    max-height: 640px;
+    overflow: auto;
+
+    display: flex;
+
+    background: whitesmoke;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.85rem;
+    line-height: 1.7;
+}
+
+.chiffre-editeur {
+    flex-shrink: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 1rem 0.75rem;
+    border-right: 2px solid black;
+
+    background: whitesmoke;
+    color: black;
+    text-align: right;
+}
+
+.contenant-editeur {
+    min-width: 0;
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 1rem 1.25rem;
+    color: #292725;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.onglets-apropos {
+    padding-inline: 0.75rem;
+    border-bottom: 1px solid #d8d5cf;
+    background: #eceae6;
+}
+
+#nav-about-tab, #nav-skills-tab{
+    margin-bottom: -1px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #655f59;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.78rem;
+}
+
+#nav-about-tab.active, #nav-skills-tab.active {
+    border-right: 1px solid #481f19;
+    border-bottom: 1px solid whitesmoke;
+    border-left: 1px solid #481f19;
+    background: rgba(245, 245, 245, 0);
+    color: #481f19;
+}
+
+.ligne-editeur {
+    flex: 0 0 auto;
+    display: block;
+    min-height: 1.7em;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.titre-editeur {
+    color: #bba042;
+    font-weight: 600;
+}
+
+.question-editeur {
+    color: #bba042;
+    font-weight: 600;
+}
+
+.reponse-editeur {
+    padding-left: 1.25rem;
+    color: rgb(0, 48, 125);
+}
+
+.ligne-code { padding-left: 1.25rem; }
+.cle-code { color: #a34220; }
+.valeur-code { color: #227054; }
+
+.statusbar-editeur {
+    display: flex;
+    gap: 1.5rem;
+    padding: 0.4rem 1rem;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: #242425;
+
+    color: #8a93ac;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.72rem;
+}
+
+@media (max-width: 1024px) {
+    .portrait-apropos {
+        align-items: center;
+    }
+
+    .portrait-apropos #photo {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+    }
+}
+
+@media (max-width: 576px) {
+    .portrait-apropos #photo {
+        width: 120px;
+        height: 120px;
+    }
+
+    .onglets-apropos {
+        padding-inline: 0.25rem;
+    }
+
+    #nav-about-tab, #nav-skills-tab {
+        padding-inline: 0.7rem;
+    }
+
+    .ligne-code {
+        padding-left: 0.5rem;
+    }
+}

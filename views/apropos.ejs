@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <title>À propos de moi</title>
+</head>
+
+<body class="page-apropos">
+    <%- include('layouts/nav'); -%>
+
+    <main class="titre-apropos">
+        <div class="titre">
+            <h2 class="label"><sup class="num">03</sup><br>À PROPOS</h2>
+        </div>
+        <section class="fenetre-terminal-about" aria-labelledby="titre-fenetre-apropos">
+            <div class="terminal-titlebar">
+                <span class="terminal-dot terminal-dot-red" aria-hidden="true"></span>
+                <span class="terminal-dot terminal-dot-yellow" aria-hidden="true"></span>
+                <span class="terminal-dot terminal-dot-green" aria-hidden="true"></span>
+                <span class="terminal-titlebar-text" id="titre-fenetre-apropos">apropos.txt — Éditeur de texte</span>
+            </div>
+
+            <nav class="nav nav-tabs onglets-apropos" id="nav-tab" role="tablist" aria-label="Informations à propos">
+                <button class="nav-link active" id="nav-about-tab" data-bs-toggle="tab" data-bs-target="#nav-about"
+                    type="button" role="tab" aria-controls="nav-about" aria-selected="true">apropos.md</button>
+                <button class="nav-link" id="nav-skills-tab" data-bs-toggle="tab" data-bs-target="#nav-skills"
+                    type="button" role="tab" aria-controls="nav-skills" aria-selected="false">skills.json</button>
+            </nav>
+
+            <div class="tab-content contenu-onglets-apropos" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-about" role="tabpanel"
+                    aria-labelledby="nav-about-tab" tabindex="0">
+                    <div class="body-editeur">
+                        <div class="chiffre-editeur" aria-hidden="true"></div>
+                        <div class="contenant-editeur">
+                            <span class="ligne-editeur titre-editeur"># À propos de moi</span>
+                            <span class="ligne-editeur ligne-vide"></span>
+                            <span class="ligne-editeur reponse-editeur">> Je suis développeur web full-stack et je recherche un stage afin de commencer la belle aventure qui m'attend.</span>
+                            <span class="ligne-editeur ligne-vide"></span> 
+                            <span class="ligne-editeur question-editeur">## Quelle est ma formation ?</span>
+                            <span class="ligne-editeur ligne-vide"></span> 
+                            <span class="ligne-editeur reponse-editeur">> Je poursuis une AEC en développement web et analyse de données au Collège CDI de Laval.</span>
+                            <span class="ligne-editeur reponse-editeur">> L'obtention du diplôme est prévue à l'automne 2026.</span>
+                            <span class="ligne-editeur ligne-vide"></span> 
+                            <span class="ligne-editeur question-editeur">## Ce que j'aime faire</span>
+                            <span class="ligne-editeur ligne-vide"></span>
+                            <span class="ligne-editeur reponse-editeur">- Résoudre des problèmes complexes</span>
+                            <span class="ligne-editeur reponse-editeur">- Apprendre chaque jour de nouvelles choses</span>
+                            <span class="ligne-editeur reponse-editeur">- Créer des expériences utilisateur efficaces</span>
+                            <span class="ligne-editeur reponse-editeur">- Donner le meilleur de moi-même sur chaque projet</span>
+                            <span class="ligne-editeur ligne-vide"></span>
+                            <span class="ligne-editeur question-editeur">## Comment je décrirais mon style de travail</span>
+                            <span class="ligne-editeur reponse-editeur">> J'aime comprendre un problème avant de proposer une solution.</span>
+                            <span class="ligne-editeur reponse-editeur">> Je commence par le plus important et je termine une tâche avant de passer à la suivante.</span>
+                            <span class="ligne-editeur reponse-editeur">> J'accorde de l'importance à la qualité et à la lisibilité du code, ainsi qu'à l'apprentissage continu.</span>
+                            <span class="ligne-editeur ligne-vide"></span>
+                            <span class="ligne-editeur question-editeur">## Comment me contacter ?</span>
+                            <span class="ligne-editeur reponse-editeur"> > Vous pouvez me joindre avec le formulaire de contact ou sur LinkedIn.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="nav-skills" role="tabpanel"
+                    aria-labelledby="nav-skills-tab" tabindex="0">
+                    <div class="body-editeur">
+                        <div class="chiffre-editeur" aria-hidden="true"></div>
+                        <div class="contenant-editeur code-competences">
+                            <span class="ligne-editeur accolade-code">{</span>
+                            <% stack.forEach(function(categorie, index) { %>
+                                <span class="ligne-editeur ligne-code"><span class="cle-code">"<%= categorie.titre %>"</span>: [<br><span class="valeur-code">"<%= categorie.skills.join('\", \"') %>"</span><br>]<br><%= index < stack.length - 1 ? ',' : '' %></span>
+                            <% }); %>
+                            <span class="ligne-editeur accolade-code">}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="statusbar-editeur" aria-label="État du document">
+                <span>Texte brut</span>
+                <span>UTF-8</span>
+                <span>Lecture seule</span>
+            </div>
+        </section>
+    </main>
+
+    <%- include('layouts/footer'); -%>
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/editeurligne.js"></script>
+</body>
+</html>

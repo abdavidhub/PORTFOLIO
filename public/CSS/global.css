@@ -1,0 +1,81 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    min-width: 0;
+    min-height: 100dvh;
+    margin: 0;
+    overflow-x: hidden;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #FDF9F0;
+    color: #141414;
+
+    font-family: "Inter", sans-serif;
+    line-height: 1.6;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+main:not(.titre-contact):not(.titre-apropos):not(.titre-projets) {
+    width: min(100%, 860px);
+    margin: 0 auto 2rem;
+    padding: 8rem 1.5rem 5rem;
+}
+
+h1,
+h2,
+h3 {
+    margin: 0 0 0.5em;
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+h1 { font-size: 2.25rem; }
+h2 { font-size: 1.25rem; letter-spacing: 0.02em; }
+h3 { font-size: 1.05rem; }
+
+p {
+    margin: 0 0 1em;
+    color: #FDF9F0;
+}
+
+a {
+    color: #ff7a45;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img,
+svg,
+video {
+    display: block;
+    max-width: 100%;
+}
+
+button,
+input,
+textarea {
+    font: inherit;
+}
+
+:focus-visible {
+    outline: 2px solid #ff7a45;
+    outline-offset: 3px;
+}

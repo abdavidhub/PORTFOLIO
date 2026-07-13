@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 320" role="img" aria-labelledby="title desc">
+  <title id="title">Logo AD bicolore</title>
+  <desc id="desc">Monogramme AD moderne, A orange paprika et D noir carbone.</desc>
+
+  <!-- A -->
+  <path fill="#EB5E28" d="M38 278 166 42h38l128 236h-55l-33-63H126l-34 63H38Zm112-108h70l-35-68-35 68Z"/>
+
+  <!-- D, légèrement imbriqué derrière le A -->
+  <path fill="#252422" fill-rule="evenodd" d="M218 42h90c101 0 174 55 174 118s-73 118-174 118h-90l28-50h62c69 0 119-28 119-68s-50-68-119-68h-62l-28-50Z"/>
+</svg>

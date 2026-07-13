@@ -1,0 +1,105 @@
+.page-bureau main {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+}
+
+.bureau-fullscreen {
+    position: relative;
+
+    width: 100%;
+    min-height: 100dvh;
+    padding: 6.5rem 2rem 3rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.bureau {
+    position: relative;
+    width: 100%;
+    display: flex;
+    top: 5rem;
+    flex-direction: vertical;
+    align-items: center;
+    gap: 4rem;
+}
+
+.icon-bureau {
+    width: 82px;
+    padding: 0.5rem 0.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+
+    border-radius: 6px;
+    color: #e7eaf2;
+}
+
+.logo-fond {
+    position: absolute;
+    top: 1rem;
+    left: 45%;
+
+    width: 150px;
+    height: 75px;
+    object-fit: contain;
+
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.45));
+}
+
+.icon-bureau:hover,
+.icon-bureau:focus-visible {
+    background: rgba(255, 255, 255, 0.1);
+    outline: 1px solid #481f19;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: 0.2s;
+    transform: translateY(-10px);
+}
+
+.icon {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.45));
+}
+
+.icon-label {
+    color: #252422;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    text-align: center;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+
+.fenetre-terminal-acceuil {
+    width: 100%;
+    max-width: 680px;
+    overflow: hidden;
+    margin-bottom: 5rem;
+    border: 1px solid #481f19;
+    border-radius: 10px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+}
+
+.fenetre-terminal-acceuil .terminal-body {
+    max-height: 380px;
+}
+
+.terminal-prompt-mobile {
+    display: none;
+}
+
+.legende-bureau {
+    color: #252422;
+    font-family: 'Bagel Fat One', system-ui;
+    font-size: 1.3rem;
+    text-align: center;
+    margin-top: 8rem;
+}

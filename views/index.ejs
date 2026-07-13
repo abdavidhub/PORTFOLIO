@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <title>Portfolio - Abdoul David Diarrassouba</title>
+</head>
+<script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<body class="page-bureau">
+    <main>
+        <section class="bureau-fullscreen">
+            <%- include('layouts/navacceuil', { currentUrl: currentUrl }) %>
+            
+        <div class="fenetre-terminal-acceuil">
+            <div class="terminal-titlebar">
+            <span class="terminal-dot terminal-dot-red"></span>
+            <span class="terminal-dot terminal-dot-yellow"></span>
+            <span class="terminal-dot terminal-dot-green"></span>
+            <span class="terminal-titlebar-text">Terminal</span>
+        </div>
+        <div class="terminal-body" id="terminal-body">
+            <div class="terminal-output" id="terminal-output"></div>
+            <div class="terminal-input-row">
+                <span class="terminal-prompt" aria-hidden="true">
+                    <span class="terminal-prompt-desktop">D:/users/david$></span>
+                    <span class="terminal-prompt-mobile">david$></span>
+                </span>
+                <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false" aria-label="Entrer une commande">
+            </div>
+        </div>
+        </div>
+
+         <div class="bureau" aria-label="Raccourcis">
+                <a class="icon-bureau" href="/projet">
+                    <img src="/images/archive_document-logo.svg" alt="" class="icon">
+                    <span class="icon-label">Projets</span>
+                </a>
+
+                <a class="icon-bureau" href="/apropos">
+                    <img src="/images/avataaars.svg" alt="" class="icon">
+                    <span class="icon-label">À propos</span>
+                </a>
+
+                <a class="icon-bureau" href="/contact">
+                    <img src="/images/mail-logo.svg" alt="" class="icon">
+                    <span class="icon-label">Contact</span>
+                </a>
+                <a class="icon-bureau"href="/assets/CV_Abdoul_david.pdf" target="_blank" rel="noopener">
+                    <img src="/images/enveloppe_pdf.svg" alt="" class="icon">
+                    <span class="icon-label">CV.pdf</span>
+                </a>
+                <a class="icon-bureau" href="https://github.com/abdavidhub" target="_blank" rel="noopener">
+                    <img src="/images/github-logo.svg" alt="" class="icon">
+                    <span class="icon-label">Github</span>
+                </a>
+                <a class="icon-bureau" href="https://www.linkedin.com/in/abdoul-david-diarrassouba" target="_blank" rel="noopener">
+                    <img src="/images/linkedin_logo.svg" alt="" class="icon">
+                    <span class="icon-label">LinkedIn</span>
+                </a>
+            </div>
+            <div>
+                        <p class="legende-bureau">Abdoul David _ Développeur Web Full-Stack _ clique sur une icône ou tape dans le terminal.</p>
+
+            </div>
+    </main>
+
+<script src="/js/terminal.js"></script>
+
+</body>
+</html>

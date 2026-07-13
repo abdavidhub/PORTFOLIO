@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <title>Connexion Admin</title>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<body>
+    <%- include('layouts/nav'); -%>
+
+    <main class="login-page">
+  
+        <div class="login-window">
+            <div class="terminal-titlebar">
+                <span class="terminal-dot terminal-dot-red"></span>
+                <span class="terminal-dot terminal-dot-yellow"></span>
+                <span class="terminal-dot terminal-dot-green"></span>
+                <span class="terminal-titlebar-text">accès administrateur — authentification requise</span>
+            </div>
+            <div class="login-body">
+                <p class="login-line">$ sudo access /admin</p>
+                <% if (typeof erreur !== 'undefined' && erreur) { %>
+                    <p class="login-line login-erreur"><%= erreur %></p>
+                <% } %>
+                <form action="/admin/login" method="POST" class="login-form">
+                    <span class="login-prompt">mot de passe :</span>
+                    <input type="password" name="motDePasse" class="login-input" autocomplete="off" autofocus required>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <%- include('layouts/footer'); -%>
+</body>
+</html>

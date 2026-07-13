@@ -1,0 +1,49 @@
+<% var projetsListe = (typeof projets !== 'undefined' && Array.isArray(projets)) ? projets : []; %>
+<div class="finder-window">
+    <div class="terminal-titlebar">
+        <span class="terminal-dot terminal-dot-red"></span>
+        <span class="terminal-dot terminal-dot-yellow"></span>
+        <span class="terminal-dot terminal-dot-green"></span>
+        <span class="terminal-titlebar-text">Projets — Finder</span>
+    </div>
+    <div class="finder-toolbar">📁 david / projets</div>
+    <div class="finder-body">
+        <% if (projetsListe.length === 0) { %>
+            <p>Aucun projet à afficher pour l'instant.</p>
+        <% } else { %>
+            <div class="finder-grid" id="finder-grid">
+                <% projetsListe.forEach(function(projet) { %>
+                    <% var imageProjet = projet.image ? projet.image.replace(/^\/uploads\//, '/images/projets/') : ''; %>
+                    <button type="button" class="finder-item"
+                        data-titre="<%= projet.titre %>"
+                        data-technologie="<%= projet.technologie || '' %>"
+                        data-description="<%= projet.description %>"
+                        data-code="<%= projet.lienCode || '' %>"
+                        data-demo="<%= projet.lienDemo || '' %>"
+                        data-image="<%= imageProjet %>">
+                        <% if (imageProjet) { %>
+                            <img class="finder-thumb" src="<%= imageProjet %>" alt="Aperçu de <%= projet.titre %>">
+                        <% } else { %>
+                            <span class="finder-icon">📁</span>
+                        <% } %>
+                        <span class="finder-label"><%= projet.titre %></span>
+                    </button>
+                <% }); %>
+            </div>
+            <div class="finder-detail" id="finder-detail" hidden>
+                <button type="button" class="finder-back" id="finder-back">← retour</button>
+                <img class="finder-detail-image" id="finder-detail-image" src="" alt="" hidden>
+                <h3 id="finder-detail-title"></h3>
+                <p class="projet-tags" id="finder-detail-technologie"></p>
+                <p id="finder-detail-description"></p>
+                <div class="projet-links" id="finder-detail-links"></div>
+            </div>
+        <% } %>
+    </div>
+    <% if (projetsListe.length > 0) { %>
+        <div class="finder-statusbar">
+            <span id="finder-count"><%= projetsListe.length %> élément<%= projetsListe.length > 1 ? 's' : '' %></span>
+        </div>
+    <% } %>
+</div>
+<script src="/js/finder.js"></script>

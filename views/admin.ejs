@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <title>Admin-Abdoul-David Diarrassouba</title>
+</head>
+<body>
+    <%- include('layouts/nav'); -%>
+
+    <main class="admin">
+        <h1>Panneau d'administration</h1>
+        <a href="/admin/logout" class="admin-logout">Déconnexion</a>
+
+        <section class="admin-add">
+            <h2>Ajouter un projet</h2>
+            <form action="/admin/projets" method="POST" enctype="multipart/form-data" class="admin-form">
+                <label for="titre">Titre</label>
+                <input type="text" id="titre" name="titre" required>
+
+                <label for="technologie">Technologies (séparées par des virgules)</label>
+                <input type="text" id="technologie" name="technologie" placeholder="Node.js, Express, MongoDB" required>
+
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="4" required></textarea>
+
+                <label for="lienCode">Lien code source</label>
+                <input type="url" id="lienCode" name="lienCode">
+
+                <label for="lienDemo">Lien démo</label>
+                <input type="url" id="lienDemo" name="lienDemo">
+
+                <label for="image">Image du projet</label>
+                <input type="file" id="image" name="image" accept="image/*">
+
+                <button type="submit" class="btn btn-primary">Ajouter le projet</button>
+            </form>
+        </section>
+
+        <section class="admin-liste">
+            <h2>Projets existants</h2>
+            <% if (typeof projets !== 'undefined' && projets.length > 0) { %>
+                <div class="admin-projets">
+                    <% projets.forEach(function(projet) { %>
+                        <% var imageProjet = projet.image ? projet.image.replace(/^\/uploads\//, '/images/projets/') : ''; %>
+                        <article class="admin-projet-card">
+                            <form action="/admin/projets/<%= projet._id %>/modifier" method="POST" enctype="multipart/form-data" class="admin-form">
+                                <label for="titre-<%= projet._id %>">Titre</label>
+                                <input type="text" id="titre-<%= projet._id %>" name="titre" value="<%= projet.titre %>" required>
+
+                                <label for="technologie-<%= projet._id %>">Technologies</label>
+                                <input type="text" id="technologie-<%= projet._id %>" name="technologie" value="<%= projet.technologie %>" required>
+
+                                <label for="description-<%= projet._id %>">Description</label>
+                                <textarea id="description-<%= projet._id %>" name="description" rows="4" required><%= projet.description %></textarea>
+
+                                <label for="lienCode-<%= projet._id %>">Lien code source</label>
+                                <input type="url" id="lienCode-<%= projet._id %>" name="lienCode" value="<%= projet.lienCode %>">
+
+                                <label for="lienDemo-<%= projet._id %>">Lien démo</label>
+                                <input type="url" id="lienDemo-<%= projet._id %>" name="lienDemo" value="<%= projet.lienDemo %>">
+
+                                <label for="image-<%= projet._id %>">Image du projet</label>
+                                <% if (imageProjet) { %>
+                                    <img src="<%= imageProjet %>" alt="Aperçu de <%= projet.titre %>" class="admin-projet-thumb">
+                                <% } %>
+                                <input type="file" id="image-<%= projet._id %>" name="image" accept="image/*">
+
+                                <div class="admin-projet-actions">
+                                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                </div>
+                            </form>
+                            <form action="/admin/projets/<%= projet._id %>/supprimer" method="POST" onsubmit="return confirm('Supprimer définitivement ce projet ?');">
+                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                            </form>
+                        </article>
+                    <% }); %>
+                </div>
+            <% } else { %>
+                <p>Aucun projet pour l'instant.</p>
+            <% } %>
+        </section>
+    </main>
+
+    <%- include('layouts/footer'); -%>
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

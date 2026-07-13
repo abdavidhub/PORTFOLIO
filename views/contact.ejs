@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <title>Contact | Abdoul-David Diarrassouba</title>
+</head>
+<body>
+    <%- include('layouts/nav'); -%>
+
+    <% if (succes) { %>
+    <div class="toast-notification toast-success" role="status">
+        <div class="toast-icon">✓</div>
+
+        <div class="toast-content">
+            <strong>Message envoyé</strong>
+            <p><%= succes %></p>
+        </div>
+
+        <button class="toast-close" type="button" aria-label="Fermer">
+            &times;
+        </button>
+
+        <div class="toast-progress"></div>
+    </div>
+<% } %>
+
+<% if (erreur) { %>
+    <div class="toast-notification toast-error" role="alert">
+        <div class="toast-icon">!</div>
+
+        <div class="toast-content">
+            <strong>Erreur d’envoi</strong>
+            <p><%= erreur %></p>
+        </div>
+
+        <button class="toast-close" type="button" aria-label="Fermer">
+            &times;
+        </button>
+
+        <div class="toast-progress"></div>
+    </div>
+<% } %>
+
+    <main class="titre-contact">
+        <div class="titre">
+            <h2 class="label"><sup class="num">04</sup><br>CONTACT</h2>
+            <div class="separateur"></div>
+        </div>
+        <section class="contact-links">
+        <div class="para-contact">
+            <h2>Une idée, un projet ?<br>Discutons-en !</h2>
+            <p id="para-contact2">Je suis toujours ouvert à de nouvelles opportunités<br> et collaborations.</p>
+
+            
+            <h2>Autres moyens de me contacter</h2>
+            <ul class="social-list">
+                <li>
+                    <a class="social-link" href="https://github.com/abdavidhub" target="_blank" rel="noopener noreferrer">
+                    <img src="/images/github.svg" alt="" class="logosocial" height="42" width="42">
+                    <span class="lien">abdavidhub</span>
+                    </a></li>
+                <li><a class="social-link" href="https://www.linkedin.com/in/abdoul-david-diarrassouba"
+                 target="_blank" rel="noopener noreferrer"><img src="/images/linkedin.svg" alt="" class="logosocial" height="42" width="42">
+                 <span class="lien">abdoul-david-diarrassouba</span>
+                </a></li>
+            </ul>
+        </section>
+        </div>
+
+
+        <div class="mail-window">
+            <div class="terminal-titlebar">
+                <span class="terminal-dot terminal-dot-red"></span>
+                <span class="terminal-dot terminal-dot-yellow"></span>
+                <span class="terminal-dot terminal-dot-green"></span>
+                <span class="terminal-titlebar-text">Nouveau message</span>
+            </div>
+
+            <form action="/contact" method="POST" class="mail-form">
+                <div class="mail-field-row">
+                    <span class="mail-label">À :</span>
+                    <span class="mail-static">abdoul.david@outlook.fr</span>
+                </div>
+                <div class="mail-field-row">
+                    <label for="nom">De :</label>
+                    <input type="text" id="nom" name="nom" value="<%= valeurs.nom || '' %>" placeholder="Votre nom" autocomplete="name" required>
+                </div>
+                <div class="mail-field-row">
+                    <label for="email">Courriel:</label>
+                    <input type="email" id="email" name="email" value="<%= valeurs.email || '' %>" placeholder="vous@exemple.com" autocomplete="email" required>
+                </div>
+                <div class="mail-field-row">
+                    <label for="objet">Objet :</label>
+                    <input type="text" id="objet" name="objet" value="<%= valeurs.objet || '' %>" placeholder="Question, collaboration..." required>
+                </div>
+
+                <div class="mail-body">
+                    <textarea id="message" name="message" rows="10" placeholder="Écrivez votre message ici..." required><%= valeurs.message || '' %></textarea>
+                </div>
+
+                <div class="mail-toolbar">
+                    <button type="submit" class="btn btn-primary"> Envoyer</button>
+                </div>
+            </form>
+        </div>
+
+    </main>
+
+    <%- include('layouts/footer'); -%>
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/toast.js"></script>
+</body>
+</html>

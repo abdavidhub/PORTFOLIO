@@ -1,0 +1,226 @@
+.btn {
+    display: inline-block;
+    padding: 0.65rem 3rem;
+
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 8px;
+
+    background: transparent;
+    color: #FDF9F0;
+
+    font-family: "Inter", sans-serif;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.btn:hover {
+    border-color: #ff7a45;
+    text-decoration: none;
+}
+
+.btn-primary {
+    border-color: #481f19;
+    background: #ff7a45;
+    color: #14100c;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    border-color: #c85a2e;
+    background: #c85a2e;
+}
+
+.terminal-window,
+.finder-window,
+.mail-window,
+.login-window {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.terminal-window {
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 8px;
+    background: #050505;
+}
+
+.terminal-titlebar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.6rem 0.9rem;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: #202020;
+}
+
+.terminal-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+}
+
+.terminal-dot-red { background: #e24b4a; }
+.terminal-dot-yellow { background: #e5b93e; }
+.terminal-dot-green { background: #3fb77a; }
+
+.terminal-titlebar-text {
+    min-width: 0;
+    margin-left: 0.5rem;
+
+    color: #FDF9F0;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.78rem;
+}
+
+.terminal-body {
+    max-height: 320px;
+    padding: 2rem 1.1rem;
+    overflow-y: auto;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.85rem;
+    cursor: text;
+}
+
+.terminal-line {
+    margin-bottom: 0.6rem;
+    line-height: 1.55;
+    white-space: pre-wrap;
+}
+
+.terminal-prompt {
+    color: #ff7a45;
+    white-space: nowrap;
+}
+
+.terminal-input-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.terminal-input {
+    min-width: 0;
+    flex: 1;
+    padding: 0.4rem 0;
+    border: 0;
+    background: transparent;
+    color: #252422;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.85rem;
+}
+
+.terminal-input:focus {
+    outline: 0;
+}
+
+.terminal-result { color: #252422; }
+.terminal-error { color: #e24b4a; }
+.terminal-echo { color: #e24b4a; }
+
+form label {
+    display: block;
+    margin: 1rem 0 0.35rem;
+    color: #202020;
+    font-size: 0.8rem;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    min-width: 0;
+    padding: 0.60rem 0.70rem;
+    border: 1px solid rgb(13, 13, 13);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    background: #FDF9F0;
+    color: #000000;
+}
+
+form input:focus,
+form textarea:focus {
+    border-color: #ff7a45;
+    outline: 0;
+}
+
+.login-page {
+    min-height: 70dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-window {
+    width: 100%;
+    max-width: 480px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 8px;
+    background: #0d1220;
+}
+
+.login-body {
+    padding: 1.25rem;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.9rem;
+}
+
+.login-line { margin-bottom: 0.75rem; color: #8a93ac; }
+.login-erreur { color: #e24b4a; }
+
+.login-form {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.login-prompt { 
+    flex: 0 0 auto; 
+    color: #ff7a45; }
+
+.login-input {
+    flex: 1;
+    padding: 0.3rem 0;
+    border-width: 0 0 1px;
+    border-radius: 0;
+    background: transparent;
+    font-family: "IBM Plex Mono", monospace;
+}
+
+.admin section + section { margin-top: 2rem; }
+.admin-form { margin-bottom: 1rem; }
+
+.admin-projets {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.admin-projet-card {
+    min-width: 0;
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    background:#FDF9F0;
+}
+
+.admin-projet-thumb {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.admin-projet-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.admin-logout {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    color: #e24b4a;
+    font-size: 0.85rem;
+}
