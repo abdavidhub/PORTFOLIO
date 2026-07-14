@@ -180,6 +180,18 @@
     overflow-wrap: anywhere;
 }
 
+.ligne-vide {
+    height: 1.7em;
+    min-height: 1.7em;
+}
+
+.chiffre-editeur > span {
+    display: block;
+    flex: 0 0 auto;
+    min-height: 1.7em;
+    line-height: 1.7;
+}
+
 .titre-editeur {
     color: #bba042;
     font-weight: 600;

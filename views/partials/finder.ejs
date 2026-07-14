@@ -13,7 +13,7 @@
         <% } else { %>
             <div class="finder-grid" id="finder-grid">
                 <% projetsListe.forEach(function(projet) { %>
-                    <% var imageProjet = projet.image ? projet.image.replace(/^\/uploads\//, '/images/projets/') : ''; %>
+                    <% var imageProjet = typeof projet.image === 'string' && projet.image !== '[object Object]' ? projet.image.replace(/^\/uploads\//, '/images/projets/') : ''; %>
                     <button type="button" class="finder-item"
                         data-titre="<%= projet.titre %>"
                         data-technologie="<%= projet.technologie || '' %>"

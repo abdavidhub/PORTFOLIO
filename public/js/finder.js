@@ -41,7 +41,7 @@
             a1.href = code;
             a1.target = '_blank';
             a1.rel = 'noopener';
-            a1.textContent = 'Code source';
+            a1.textContent = 'Github';
             linksEl.appendChild(a1);
         }
         if (demo) {

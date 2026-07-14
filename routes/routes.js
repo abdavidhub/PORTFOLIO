@@ -1,10 +1,8 @@
 const express = require('express');
-const path = require('path');
-const fs = require('fs/promises');
 const bcrypt = require('bcryptjs');
-
 const Projet = require('../models/Projet');
-const upload = require('../utils/upload');
+const upload = require("../middleware/uploadCloudinary");
+const cloudinary = require('../utils/cloudinary');
 const { requireAuth } = require('../middleware/auth');
 const contactController = require('../controllers/controllerContact');
 
@@ -18,19 +16,47 @@ const stack = [
     { titre: 'Autres', skills: ['SCRUM / Agile (notions)'] }
 ];
 
-async function supprimerImageProjet(imageUrl) {
-    const nomFichier = path.basename(imageUrl || '');
-    if (!nomFichier) return;
+function informationsImageCloudinary(file) {
+    if (!file) return { url: null, publicId: null };
 
-    const cheminImage = path.join(__dirname, '..', 'public', 'images', 'projets', nomFichier);
+    const resultat = file.path && typeof file.path === 'object' ? file.path : file;
+    const chemin = typeof file.path === 'string' && file.path !== '[object Object]'
+        ? file.path
+        : null;
+    const url = chemin || resultat.secure_url || resultat.url || file.secure_url || file.url || null;
+    const publicId = file.filename || resultat.public_id || file.public_id || null;
+
+    return { url, publicId };
+}
+
+async function supprimerImageCloudinary(publicId) {
+    if (publicId) await cloudinary.uploader.destroy(publicId);
+}
+
+function messageErreurUpload(error) {
+    if (typeof error === 'string') return error;
+    if (error && typeof error.message === 'string') return error.message;
+    if (error && error.error && typeof error.error.message === 'string') return error.error.message;
+
     try {
-        await fs.unlink(cheminImage);
-    } catch (error) {
-        if (error.code !== 'ENOENT') throw error;
+        return JSON.stringify(error);
+    } catch {
+        return 'Erreur Cloudinary inconnue.';
     }
 }
 
-router.get('/', (req, res) => res.render('index'));
+function uploadImage(req, res, next) {
+    upload.single('image')(req, res, (error) => {
+        if (!error) return next();
+
+        const message = messageErreurUpload(error);
+        console.error('Erreur upload Cloudinary :', error);
+        return res.status(400).send('Erreur lors de l upload de l image : ' + message);
+    });
+}
+
+router.get('/', async (req, res) => 
+    res.render('index'));
 
 router.get('/projet', async (req, res) => {
     try {
@@ -85,60 +111,113 @@ router.get('/admin', requireAuth, async (req, res) => {
     }
 });
 
-router.post('/admin/projets', requireAuth, upload.single('image'), async (req, res) => {
-    try {
-        const nouveauProjet = new Projet({
-            titre: req.body.titre,
-            description: req.body.description,
-            technologie: req.body.technologie,
-            lienCode: req.body.lienCode,
-            lienDemo: req.body.lienDemo,
-            image: req.file ? '/images/projets/' + req.file.filename : null
-        });
-        await nouveauProjet.save();
-        return res.redirect('/admin');
-    } catch (error) {
-        console.error('Erreur ajout projet :', error);
-        return res.status(500).send('Impossible ajouter le projet.');
-    }
-});
+router.post("/admin/projets", requireAuth, uploadImage, async (req, res) => {
+        try {
+            const imageCloudinary = informationsImageCloudinary(req.file);
+            if (req.file && !imageCloudinary.url) {
+                throw new Error('URL Cloudinary absente de la réponse upload.');
+            }
 
-router.post('/admin/projets/:id/modifier', requireAuth, upload.single('image'), async (req, res) => {
+            const {
+                titre,
+                technologie,
+                description,
+                lienCode,
+                lienDemo
+            } = req.body;
+
+            const nouveauProjet = new Projet({
+                titre,
+                technologie,
+                description,
+                lienCode,
+                lienDemo,
+
+                image: imageCloudinary.url,
+                imagePublicId: imageCloudinary.publicId
+            });
+
+            await nouveauProjet.save();
+
+            return res.redirect("/admin");
+
+        } catch (error) {
+            console.error("Erreur ajout projet :", error);
+
+            const imageCloudinary = informationsImageCloudinary(req.file);
+            await supprimerImageCloudinary(imageCloudinary.publicId).catch(() => {});
+
+            return res.status(500).send(
+                "Impossible d’ajouter le projet."
+            );
+        }
+    }
+);
+
+router.post('/admin/projets/:id/modifier', requireAuth, uploadImage, async (req, res) => {
     try {
+        const nouvelleImage = informationsImageCloudinary(req.file);
+        if (req.file && !nouvelleImage.url) {
+            throw new Error('URL Cloudinary absente de la réponse upload.');
+        }
+
         const projet = await Projet.findById(req.params.id);
         if (!projet) {
-            if (req.file) await supprimerImageProjet(req.file.filename);
+            await supprimerImageCloudinary(nouvelleImage.publicId);
             return res.status(404).send('Projet introuvable.');
         }
 
-        const ancienneImage = projet.image;
+        const ancienPublicId = projet.imagePublicId;
         projet.titre = req.body.titre;
         projet.description = req.body.description;
         projet.technologie = req.body.technologie;
         projet.lienCode = req.body.lienCode;
         projet.lienDemo = req.body.lienDemo;
-        if (req.file) projet.image = '/images/projets/' + req.file.filename;
+        if (req.file) {
+            projet.image = nouvelleImage.url;
+            projet.imagePublicId = nouvelleImage.publicId;
+        }
 
         await projet.save();
-        if (req.file && ancienneImage) await supprimerImageProjet(ancienneImage);
+        if (req.file && ancienPublicId) {
+            await supprimerImageCloudinary(ancienPublicId).catch((error) => {
+                console.error('Erreur suppression ancienne image Cloudinary :', error);
+            });
+        }
         return res.redirect('/admin');
     } catch (error) {
         console.error('Erreur modification projet :', error);
+        const nouvelleImage = informationsImageCloudinary(req.file);
+        await supprimerImageCloudinary(nouvelleImage.publicId).catch(() => {});
         return res.status(500).send('Impossible de modifier le projet.');
     }
 });
 
-router.post('/admin/projets/:id/supprimer', requireAuth, async (req, res) => {
-    try {
-        const projet = await Projet.findByIdAndDelete(req.params.id);
-        if (!projet) return res.status(404).send('Projet introuvable.');
+router.post(
+    "/admin/projets/:id/supprimer",
+    requireAuth,
+    async (req, res) => {
+        try {
+            const projet = await Projet.findById(req.params.id);
 
-        if (projet.image) await supprimerImageProjet(projet.image);
-        return res.redirect('/admin');
-    } catch (error) {
-        console.error('Erreur suppression projet :', error);
-        return res.status(500).send('Impossible de supprimer le projet.');
+            if (!projet) {
+                return res.status(404).send("Projet introuvable.");
+            }
+
+            await supprimerImageCloudinary(projet.imagePublicId);
+
+            await projet.deleteOne();
+
+            return res.redirect("/admin");
+
+        } catch (error) {
+            console.error("Erreur suppression projet :", error);
+
+            return res.status(500).send(
+                "Impossible de supprimer le projet."
+            );
+        }
     }
-});
+);
 
 module.exports = router;

@@ -45,7 +45,7 @@
             <% if (typeof projets !== 'undefined' && projets.length > 0) { %>
                 <div class="admin-projets">
                     <% projets.forEach(function(projet) { %>
-                        <% var imageProjet = projet.image ? projet.image.replace(/^\/uploads\//, '/images/projets/') : ''; %>
+                        <% var imageProjet = typeof projet.image === 'string' && projet.image !== '[object Object]' ? projet.image.replace(/^\/uploads\//, '/images/projets/') : ''; %>
                         <article class="admin-projet-card">
                             <form action="/admin/projets/<%= projet._id %>/modifier" method="POST" enctype="multipart/form-data" class="admin-form">
                                 <label for="titre-<%= projet._id %>">Titre</label>
@@ -57,7 +57,7 @@
                                 <label for="description-<%= projet._id %>">Description</label>
                                 <textarea id="description-<%= projet._id %>" name="description" rows="4" required><%= projet.description %></textarea>
 
-                                <label for="lienCode-<%= projet._id %>">Lien code source</label>
+                                <label for="lienCode-<%= projet._id %>">Lien Github</label>
                                 <input type="url" id="lienCode-<%= projet._id %>" name="lienCode" value="<%= projet.lienCode %>">
 
                                 <label for="lienDemo-<%= projet._id %>">Lien démo</label>
@@ -65,7 +65,7 @@
 
                                 <label for="image-<%= projet._id %>">Image du projet</label>
                                 <% if (imageProjet) { %>
-                                    <img src="<%= imageProjet %>" alt="Aperçu de <%= projet.titre %>" class="admin-projet-thumb">
+                                    <img src="<%= imageProjet %>" alt="<%= projet.titre %>" class="image-projet">
                                 <% } %>
                                 <input type="file" id="image-<%= projet._id %>" name="image" accept="image/*">
 

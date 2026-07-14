@@ -6,7 +6,8 @@ description: {type: String, required: true},
 technologie: {type: String, required: true},
 lienCode: {type: String},
 lienDemo:{type: String},
-image: {type: String}
+image: {type: String},
+imagePublicId:{type: String}
 },
 {timestamps: true})
 const Projet = mongoose.model('Projet',projetSchema); 

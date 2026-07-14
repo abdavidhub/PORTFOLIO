@@ -5,7 +5,6 @@ const express = require('express');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const routes = require('./routes/routes');
-
 dns.setServers(['8.8.8.8', '8.8.4.4']);
 mongoose.set('strictQuery', false);
 

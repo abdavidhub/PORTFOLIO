@@ -73,11 +73,6 @@ exports.envoyerMessage = async (req, res) => {
             ].join("\n")
         });
 
-        console.log("Message ID :", info.messageId);
-        console.log("Acceptés :", info.accepted);
-        console.log("Rejetés :", info.rejected);
-        console.log("Réponse SMTP :", info.response);
-
         if (!info.accepted?.includes(process.env.CONTACT_EMAIL)) {
             throw new Error("L’adresse destinataire n’a pas été acceptée par le serveur SMTP.");
         }
