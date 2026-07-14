@@ -3,7 +3,7 @@ require('dotenv').config();
 const dns = require('dns');
 const express = require('express');
 const session = require('express-session');
-const MongoStore = require("connect-mongo")
+const MongoStore = require('connect-mongo').default;
 const mongoose = require('mongoose');
 const routes = require('./routes/routes');
 dns.setServers(['8.8.8.8', '8.8.4.4']);
@@ -23,13 +23,13 @@ app.use(express.json());
 
 app.set("trust proxy", 1);
 app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({
-            mongoUrl: process.env.MONGODB_URI,
-            collectionName: "sessions"
-        }),
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+        store: MongoStore.create({
+        mongoUrl: process.env.MONGO_URI,
+        collectionName: "sessions"
+    }),
 
         cookie: {
             httpOnly: true,
@@ -37,8 +37,8 @@ app.use(session({
             sameSite: "lax",
             maxAge: 1000 * 60 * 60 * 4
         }
-    }));
-
+    })
+);
 app.use((req, res, next) => {
     res.locals.currentUrl = req.path;
     next();
